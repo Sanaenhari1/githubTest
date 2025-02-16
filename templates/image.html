@@ -1,0 +1,110 @@
+<style>
+
+    body {
+        font-family: 'Arial', sans-serif;
+        background: #1a1a2e;
+        color: white;
+        text-align: center;
+        margin: 0;
+    }
+    
+    .container {
+        max-width: 800px;
+        margin: auto;
+        padding: 30px;
+        background: rgba(40, 44, 68, 0.85);
+        border-radius: 12px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    h1 {
+        font-size: 2.5rem;
+        color: #f39c12;
+        margin-bottom: 20px;
+    }
+    
+    .file-upload {
+        display: block;
+        margin: 20px auto;
+        background: linear-gradient(45deg, #8e2de2, #4a00e0);
+        color: white;
+        padding: 12px;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+    
+    .file-upload:hover {
+        background: #ff9900;
+    }
+    
+    .select-container {
+        margin-top: 20px;
+    }
+    
+    .btn {
+        background: #8e2de2;
+        color: white;
+        padding: 12px 24px;
+        border-radius: 8px;
+        cursor: pointer;
+        margin-top: 20px;
+    }
+    
+    .btn:hover {
+        background: #8000ff;
+    }
+    
+    .image-container {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin-top: 40px;
+        flex-wrap: wrap;
+    }
+    
+    .image-container img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    }
+</style>
+
+<div class="container">
+    <h1>🖼️ Image Editor</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <label class="file-upload" for="file-upload">Upload Image</label>
+        <input type="file" id="file-upload" name="file" accept="image/*" required hidden>
+
+        <div class="select-container">
+            <label for="effect">Choose an effect:</label>
+            <select name="effect" id="effect">
+                <option value="grayscale">Grayscale</option>
+                <option value="sepia">Sepia</option>
+                <option value="invert">Invert Colors</option>
+                <option value="blur">Blur</option>
+                <option value="pixelate">Pixelate</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn">Apply Effect</button>
+    </form>
+
+    {% if original_image and processed_image %}
+    <div class="image-container">
+        <div>
+            <h2>Original Image</h2>
+            <img src="{{ original_image }}" alt="Original Image">
+        </div>
+        <div>
+            <h2>Processed Image</h2>
+            <img src="{{ processed_image }}" alt="Processed Image">
+            <a href="{{ download_link }}">
+                <button class="btn">Download Processed Image</button>
+            </a>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+© 2025 Interactive Generative Art Gallery
