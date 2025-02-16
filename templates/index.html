@@ -1,1 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Generative Art Gallery</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <header>
+        <h1>🎨 Interactive Generative Art Gallery</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('home') }}">🏠 Home</a></li>
+            <li><a href="{{ url_for('generate_art') }}">🖌️ Generate Art</a></li>
+            <li><a href="{{ url_for('data_visualization') }}">📊 View Data</a></li>
+            <li><a href="{{ url_for('upload_image') }}">🖼️ Upload Image</a></li>
+            <li><a href="{{ url_for('modify_audio') }}">🎵 Modify Audio</a></li>
+        </ul>
+    </nav>
+
+    <section class="content">
+        <h2>Welcome to the Interactive Generative Art Gallery</h2>
+        <p>Explore different types of interactive art, data visualization, and creative tools.</p>
+        <canvas id="artCanvas"></canvas>
+    </section>
+
+    <footer>
+        <p>© 2025 Interactive Generative Art Gallery</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>
