@@ -1,1 +1,90 @@
+<style>
 
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #16213e;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 1rem;
+        color: white;
+    }
+    
+    .contact-container {
+        background: #f1edf4;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        max-width: 500px;
+        width: 100%;
+        text-align: center;
+        color: #16213e;
+    }
+    
+    .contact-container h2 {
+        margin-bottom: 1.5rem;
+    }
+    
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    label {
+        margin-bottom: 0.5rem;
+        font-size: 1rem;
+        color: #555;
+    }
+    
+    input,
+    textarea {
+        padding: 0.8rem;
+        margin-bottom: 1rem;
+        border: 1px solid #8e2de2;
+        border-radius: 4px;
+        font-size: 1rem;
+        outline: none;
+    }
+    
+    input:hover,
+    textarea:hover {
+        border: 3px solid #8e2de2;
+    }
+    
+    textarea {
+        resize: vertical;
+        min-height: 120px;
+    }
+    
+    button {
+        padding: 14px 25px;
+        background: linear-gradient(45deg, #8e2de2, #4a00e0);
+        color: white;
+        font-size: 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.5s ease, transform 0.3s ease;
+    }
+    
+    button:hover {
+        background: linear-gradient(45deg, #ff9900, #8000ff);
+        transform: scale(1.1);
+    }
+</style>
+
+<div class="contact-container">
+    <h2>Contact Us</h2>
+    <form action="/contact" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" placeholder="Your Name" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="Your Email" required>
+
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+
+        <button type="submit">Send Message</button>
+    </form>
+</div>© 2025 Interactive Generative Art Gallery
