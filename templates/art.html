@@ -1,1 +1,103 @@
+{% extends 'useful1.html' %} {% block title %}Generative Art Generator{% endblock %} {% block content %}
 
+<h1 class="text-center mt-4">🎨 Generative Art Studio</h1>
+<div class="text-center">
+    <button id="addCanvas" class="btn btn-outline-primary mt-4 p-3">➕ Add Canvas</button>
+    <button id="saveCanvas" class="btn btn-outline-success mt-4 p-3 mx-2">💾 Save Artwork</button>
+    <button id="addShape" class="btn btn-outline-info mt-4 p-3 mx-2">🎨 Add Shape</button>
+    <button id="modifyShape" class="btn btn-outline-warning p-3 mt-4">✏ Modify Shape</button>
+</div>
+
+<!-- Modal for Adding Shape -->
+<div class="modal fade" id="addShapeModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-info text-white">
+                <h5 class="modal-title">➕ Add a New Shape</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="shapeForm">
+                    <div class="mb-3">
+                        <label for="shapeType" class="form-label">Shape Type</label>
+                        <select class="form-select" id="shapeType">
+              <option value="circle">Circle</option>
+              <option value="square">Square</option>
+              <option value="triangle">Triangle</option>
+            </select>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label class="form-label">Size</label>
+                            <input type="number" class="form-control" id="shapeSize" value="50">
+                        </div>
+                        <div class="col">
+                            <label class="form-label">Color</label>
+                            <input type="color" class="form-control form-control-color" id="shapeColor" value="#ff0000">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col">
+                            <label class="form-label">X Position</label>
+                            <input type="number" class="form-control" id="shapePositionX" value="100">
+                        </div>
+                        <div class="col">
+                            <label class="form-label">Y Position</label>
+                            <input type="number" class="form-control" id="shapePositionY" value="100">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-info text-white" id="confirmAddShape">Add Shape</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Canvas Display Area -->
+<div class="container text-center my-5">
+    <div class="row row-cols-2 row-cols-md-3 g-4" id="canvasContainer">
+        <div class="col">
+            <canvas class="art-canvas" data-shapes="[]"></canvas>
+            <button class="btn btn-danger mt-3 removeCanvas">🗑 Remove</button>
+        </div>
+    </div>
+</div>
+
+<style>
+    .art-canvas {
+        width: 480px;
+        height: 450px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+    }
+    
+    .art-canvas:hover {
+        transform: scale(1.05);
+        box-shadow: 6px 6px 18px rgba(0, 0, 0, 0.3);
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const container = document.getElementById("canvasContainer");
+        document.getElementById("addCanvas").addEventListener("click", function() {
+            const col = document.createElement("div");
+            col.className = "col";
+            col.innerHTML = '<canvas class="art-canvas" data-shapes="[]"></canvas> <button class="btn btn-danger mt-3 removeCanvas">🗑 Remove</button>';
+            container.appendChild(col);
+        });
+
+        container.addEventListener("click", function(event) {
+            if (event.target.classList.contains("removeCanvas")) {
+                event.target.parentElement.remove();
+            }
+        });
+    });
+</script>
+
+{% endblock %}
