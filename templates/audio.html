@@ -1,1 +1,114 @@
+{% extends 'useful1.html' %} {% block title %}Audio Editor{% endblock %} {% block content %}
+<div class="container">
+    <h1 class="title">🎵 Audio Editor</h1>
 
+    <div class="upload-section">
+        <form action="{{ url_for('index') }}" method="POST" enctype="multipart/form-data">
+            <input type="file" name="audio_file" accept="audio/*" id="audioUpload" class="file-input" required>
+            <label for="audioUpload" class="custom-file-upload">🎵 Choose an Audio File</label>
+            <button type="submit" class="btn">Upload Audio</button>
+        </form>
+    </div>
+
+    {% if audio_url_original %}
+    <div class="audio-section">
+        <h2>🎶 Original Audio</h2>
+        <audio controls>
+            <source src="{{ url_for('uploaded_file', filename=audio_url_original.split('/')[-1]) }}" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+    {% endif %} {% if audio_url_modified %}
+    <div class="audio-section">
+        <h2>🔊 Modified Audio</h2>
+        <audio controls>
+            <source src="{{ url_for('modified_file', filename=audio_url_modified.split('/')[-1]) }}" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+    {% endif %} {% if audio_url_original %}
+    <div class="modifications-section">
+        <h2>🎛️ Apply Modifications</h2>
+        <form action="{{ url_for('index') }}" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="filename" value="{{ audio_url_original.split('/')[-1] }}">
+
+            <label>Speed (0.5 to 2.0):</label>
+            <input type="number" name="speed" value="1.0" min="0.5" max="2.0" step="0.1" required>
+
+            <label>Volume (in dB):</label>
+            <input type="number" name="volume" value="0" min="-50" max="50" step="1">
+
+            <label>Effects:</label>
+            <select name="effects">
+                <option value="none">None</option>
+                <option value="echo">Echo</option>
+                <option value="reverse">Reverse</option>
+            </select>
+
+            <label>Layer Audio (optional):</label>
+            <input type="file" name="layer_audio" accept="audio/*">
+
+            <button type="submit" name="apply_modification" class="btn">Apply Modifications</button>
+        </form>
+    </div>
+    {% endif %}
+</div>
+
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: #1a1a2e;
+        color: white;
+        margin: 0;
+        overflow: auto;
+        text-align: center;
+    }
+    
+    .container {
+        max-width: 700px;
+        margin: auto;
+        padding: 30px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        backdrop-filter: blur(8px);
+    }
+    
+    .title {
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+    
+    .upload-section,
+    .audio-section,
+    .modifications-section {
+        margin-bottom: 25px;
+    }
+    
+    .custom-file-upload {
+        display: block;
+        background: linear-gradient(45deg, #ffcc00, #9933ff);
+        color: white;
+        padding: 10px;
+        margin: 10px auto;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    
+    .btn {
+        background: #4a00e0;
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        border: none;
+    }
+    
+    .btn:hover {
+        background: #8000ff;
+    }
+    
+    .file-input {
+        display: none;
+    }
+</style>
+{% endblock %}
